@@ -19,3 +19,20 @@ jobs:
           VERSION_TAG="v${VERSION_INCR}.${VERSION_TIME}.${VERSION_SHA}"
           echo "Version: $VERSION_TAG"
           echo "VERSION_TAG=$VERSION_TAG" >> $GITHUB_OUTPUT
+
+      - name: Configure CMake
+        run: cmake -S . -B build/release -DCMAKE_BUILD_TYPE=Release -DBUILD_TEST=ON
+
+      - name: Build CMake
+        run: cmake --build build/release
+
+      - name: Run tests
+        run: ctest --test-dir build/release
+
+      - name: Push Git Tag
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "github-actions@users.noreply.github.com"
+          git tag ${{ steps.generate_version.outputs.VERSION_TAG }} || true
+          git push origin ${{ steps.generate_version.outputs.VERSION_TAG }} || true
+          git fetch || true
