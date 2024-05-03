@@ -1,3 +1,5 @@
+[![Build](https://github.com/anthonyliot/opencl-wrapper/actions/workflows/build.yaml/badge.svg)](https://github.com/anthonyliot/opencl-wrapper/actions/workflows/build.yaml)
+
 ### INSTALLATION
 
 - VSCODE EXTENSION

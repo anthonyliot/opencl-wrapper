@@ -27,7 +27,7 @@ jobs:
         run: cmake --build build/release
 
       - name: Run tests
-        run: ctest --test-dir build/release
+        run: ctest --test-dir build/release --output-on-failure
 
       - name: Push Git Tag
         run: |
