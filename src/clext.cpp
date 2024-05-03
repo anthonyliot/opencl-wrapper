@@ -1,6 +1,8 @@
+#include <algorithm>
 #include <cassert>
 #include <clext.h>
 #include <clwrapper.h>
+#include <string.h>
 #include <string>
 
 static cl_platform_id cl_ext_platform = NULL;
