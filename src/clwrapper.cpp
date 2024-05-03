@@ -223,10 +223,10 @@ int CLWrapper::init()
 
     printf("[DEBUG] Loading \"%s\"...\n", cl_name);
 
-#ifdef _LINUX
-    cl_handle = dlopen(cl_name, RTLD_LAZY | RTLD_DEEPBIND);
-#else
+#ifdef __APPLE__
     cl_handle = dlopen(cl_name, RTLD_LAZY);
+#else
+    cl_handle = dlopen(cl_name, RTLD_LAZY | RTLD_DEEPBIND);
 #endif
     if (cl_handle == NULL)
     {
