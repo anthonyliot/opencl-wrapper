@@ -221,7 +221,7 @@ int CLWrapper::init()
 {
     assert(cl_handle == NULL && "CLWrapper::init(): is already initialized");
 
-    printf("[DEBUG] Loading \"%s\"...\n", cl_name);
+    // printf("[DEBUG] Loading \"%s\"...\n", cl_name);
 
 #ifdef __APPLE__
     cl_handle = dlopen(cl_name, RTLD_LAZY);
@@ -337,7 +337,7 @@ int CLWrapper::shutdown()
 {
     if (cl_handle != NULL)
     {
-        printf("[DEBUG] Close \"%s\"\n", cl_name);
+        // printf("[DEBUG] Close \"%s\"\n", cl_name);
         dlclose(cl_handle);
         cl_handle = NULL;
     }
