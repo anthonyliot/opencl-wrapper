@@ -456,24 +456,6 @@ float nanf(const char *);
 #define __CL_DOUBLE4__ 1
 #endif
 
-/* Define capabilities for anonymous struct members. */
-#if defined(__GNUC__) && !defined(__STRICT_ANSI__)
-#define __CL_HAS_ANON_STRUCT__ 1
-#define __CL_ANON_STRUCT__ __extension__
-#elif defined(_WIN32) && (_MSC_VER >= 1500)
-/* Microsoft Developer Studio 2008 supports anonymous structs, but
- * complains by default. */
-#define __CL_HAS_ANON_STRUCT__ 1
-#define __CL_ANON_STRUCT__
-/* Disable warning C4201: nonstandard extension used : nameless
- * struct/union */
-#pragma warning(push)
-#pragma warning(disable : 4201)
-#else
-#define __CL_HAS_ANON_STRUCT__ 0
-#define __CL_ANON_STRUCT__
-#endif
-
 /* Define alignment keys */
 #if defined(__GNUC__)
 #define CL_ALIGNED(_x) __attribute__((aligned(_x)))
@@ -489,7 +471,7 @@ float nanf(const char *);
 #endif
 
 /* Indicate whether .xyzw, .s0123 and .hi.lo are supported */
-#if __CL_HAS_ANON_STRUCT__
+#if defined(__GNUC__) && !defined(__STRICT_ANSI__)
 /* .xyzw and .s0123...{f|F} are supported */
 #define CL_HAS_NAMED_VECTOR_FIELDS 1
 /* .hi and .lo are supported */
@@ -501,16 +483,16 @@ float nanf(const char *);
     /* ---- cl_charn ---- */
     typedef union {
         cl_char CL_ALIGNED(2) s[2];
-#if __CL_HAS_ANON_STRUCT__
-        __CL_ANON_STRUCT__ struct
+#if defined(__GNUC__) && !defined(__STRICT_ANSI__)
+        __extension__ struct
         {
             cl_char x, y;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_char s0, s1;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_char lo, hi;
         };
@@ -522,16 +504,16 @@ float nanf(const char *);
 
     typedef union {
         cl_char CL_ALIGNED(4) s[4];
-#if __CL_HAS_ANON_STRUCT__
-        __CL_ANON_STRUCT__ struct
+#if defined(__GNUC__) && !defined(__STRICT_ANSI__)
+        __extension__ struct
         {
             cl_char x, y, z, w;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_char s0, s1, s2, s3;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_char2 lo, hi;
         };
@@ -549,16 +531,16 @@ float nanf(const char *);
 
     typedef union {
         cl_char CL_ALIGNED(8) s[8];
-#if __CL_HAS_ANON_STRUCT__
-        __CL_ANON_STRUCT__ struct
+#if defined(__GNUC__) && !defined(__STRICT_ANSI__)
+        __extension__ struct
         {
             cl_char x, y, z, w;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_char s0, s1, s2, s3, s4, s5, s6, s7;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_char4 lo, hi;
         };
@@ -576,17 +558,17 @@ float nanf(const char *);
 
     typedef union {
         cl_char CL_ALIGNED(16) s[16];
-#if __CL_HAS_ANON_STRUCT__
-        __CL_ANON_STRUCT__ struct
+#if defined(__GNUC__) && !defined(__STRICT_ANSI__)
+        __extension__ struct
         {
             cl_char x, y, z, w, __spacer4, __spacer5, __spacer6, __spacer7, __spacer8, __spacer9, sa, sb, sc, sd, se,
                 sf;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_char s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, sA, sB, sC, sD, sE, sF;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_char8 lo, hi;
         };
@@ -608,16 +590,16 @@ float nanf(const char *);
     /* ---- cl_ucharn ---- */
     typedef union {
         cl_uchar CL_ALIGNED(2) s[2];
-#if __CL_HAS_ANON_STRUCT__
-        __CL_ANON_STRUCT__ struct
+#if defined(__GNUC__) && !defined(__STRICT_ANSI__)
+        __extension__ struct
         {
             cl_uchar x, y;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_uchar s0, s1;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_uchar lo, hi;
         };
@@ -629,16 +611,16 @@ float nanf(const char *);
 
     typedef union {
         cl_uchar CL_ALIGNED(4) s[4];
-#if __CL_HAS_ANON_STRUCT__
-        __CL_ANON_STRUCT__ struct
+#if defined(__GNUC__) && !defined(__STRICT_ANSI__)
+        __extension__ struct
         {
             cl_uchar x, y, z, w;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_uchar s0, s1, s2, s3;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_uchar2 lo, hi;
         };
@@ -656,16 +638,16 @@ float nanf(const char *);
 
     typedef union {
         cl_uchar CL_ALIGNED(8) s[8];
-#if __CL_HAS_ANON_STRUCT__
-        __CL_ANON_STRUCT__ struct
+#if defined(__GNUC__) && !defined(__STRICT_ANSI__)
+        __extension__ struct
         {
             cl_uchar x, y, z, w;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_uchar s0, s1, s2, s3, s4, s5, s6, s7;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_uchar4 lo, hi;
         };
@@ -683,17 +665,17 @@ float nanf(const char *);
 
     typedef union {
         cl_uchar CL_ALIGNED(16) s[16];
-#if __CL_HAS_ANON_STRUCT__
-        __CL_ANON_STRUCT__ struct
+#if defined(__GNUC__) && !defined(__STRICT_ANSI__)
+        __extension__ struct
         {
             cl_uchar x, y, z, w, __spacer4, __spacer5, __spacer6, __spacer7, __spacer8, __spacer9, sa, sb, sc, sd, se,
                 sf;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_uchar s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, sA, sB, sC, sD, sE, sF;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_uchar8 lo, hi;
         };
@@ -715,16 +697,16 @@ float nanf(const char *);
     /* ---- cl_shortn ---- */
     typedef union {
         cl_short CL_ALIGNED(4) s[2];
-#if __CL_HAS_ANON_STRUCT__
-        __CL_ANON_STRUCT__ struct
+#if defined(__GNUC__) && !defined(__STRICT_ANSI__)
+        __extension__ struct
         {
             cl_short x, y;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_short s0, s1;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_short lo, hi;
         };
@@ -736,16 +718,16 @@ float nanf(const char *);
 
     typedef union {
         cl_short CL_ALIGNED(8) s[4];
-#if __CL_HAS_ANON_STRUCT__
-        __CL_ANON_STRUCT__ struct
+#if defined(__GNUC__) && !defined(__STRICT_ANSI__)
+        __extension__ struct
         {
             cl_short x, y, z, w;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_short s0, s1, s2, s3;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_short2 lo, hi;
         };
@@ -763,16 +745,16 @@ float nanf(const char *);
 
     typedef union {
         cl_short CL_ALIGNED(16) s[8];
-#if __CL_HAS_ANON_STRUCT__
-        __CL_ANON_STRUCT__ struct
+#if defined(__GNUC__) && !defined(__STRICT_ANSI__)
+        __extension__ struct
         {
             cl_short x, y, z, w;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_short s0, s1, s2, s3, s4, s5, s6, s7;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_short4 lo, hi;
         };
@@ -790,17 +772,17 @@ float nanf(const char *);
 
     typedef union {
         cl_short CL_ALIGNED(32) s[16];
-#if __CL_HAS_ANON_STRUCT__
-        __CL_ANON_STRUCT__ struct
+#if defined(__GNUC__) && !defined(__STRICT_ANSI__)
+        __extension__ struct
         {
             cl_short x, y, z, w, __spacer4, __spacer5, __spacer6, __spacer7, __spacer8, __spacer9, sa, sb, sc, sd, se,
                 sf;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_short s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, sA, sB, sC, sD, sE, sF;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_short8 lo, hi;
         };
@@ -822,16 +804,16 @@ float nanf(const char *);
     /* ---- cl_ushortn ---- */
     typedef union {
         cl_ushort CL_ALIGNED(4) s[2];
-#if __CL_HAS_ANON_STRUCT__
-        __CL_ANON_STRUCT__ struct
+#if defined(__GNUC__) && !defined(__STRICT_ANSI__)
+        __extension__ struct
         {
             cl_ushort x, y;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_ushort s0, s1;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_ushort lo, hi;
         };
@@ -843,16 +825,16 @@ float nanf(const char *);
 
     typedef union {
         cl_ushort CL_ALIGNED(8) s[4];
-#if __CL_HAS_ANON_STRUCT__
-        __CL_ANON_STRUCT__ struct
+#if defined(__GNUC__) && !defined(__STRICT_ANSI__)
+        __extension__ struct
         {
             cl_ushort x, y, z, w;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_ushort s0, s1, s2, s3;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_ushort2 lo, hi;
         };
@@ -870,16 +852,16 @@ float nanf(const char *);
 
     typedef union {
         cl_ushort CL_ALIGNED(16) s[8];
-#if __CL_HAS_ANON_STRUCT__
-        __CL_ANON_STRUCT__ struct
+#if defined(__GNUC__) && !defined(__STRICT_ANSI__)
+        __extension__ struct
         {
             cl_ushort x, y, z, w;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_ushort s0, s1, s2, s3, s4, s5, s6, s7;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_ushort4 lo, hi;
         };
@@ -897,17 +879,17 @@ float nanf(const char *);
 
     typedef union {
         cl_ushort CL_ALIGNED(32) s[16];
-#if __CL_HAS_ANON_STRUCT__
-        __CL_ANON_STRUCT__ struct
+#if defined(__GNUC__) && !defined(__STRICT_ANSI__)
+        __extension__ struct
         {
             cl_ushort x, y, z, w, __spacer4, __spacer5, __spacer6, __spacer7, __spacer8, __spacer9, sa, sb, sc, sd, se,
                 sf;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_ushort s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, sA, sB, sC, sD, sE, sF;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_ushort8 lo, hi;
         };
@@ -929,16 +911,16 @@ float nanf(const char *);
     /* ---- cl_intn ---- */
     typedef union {
         cl_int CL_ALIGNED(8) s[2];
-#if __CL_HAS_ANON_STRUCT__
-        __CL_ANON_STRUCT__ struct
+#if defined(__GNUC__) && !defined(__STRICT_ANSI__)
+        __extension__ struct
         {
             cl_int x, y;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_int s0, s1;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_int lo, hi;
         };
@@ -950,16 +932,16 @@ float nanf(const char *);
 
     typedef union {
         cl_int CL_ALIGNED(16) s[4];
-#if __CL_HAS_ANON_STRUCT__
-        __CL_ANON_STRUCT__ struct
+#if defined(__GNUC__) && !defined(__STRICT_ANSI__)
+        __extension__ struct
         {
             cl_int x, y, z, w;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_int s0, s1, s2, s3;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_int2 lo, hi;
         };
@@ -977,16 +959,16 @@ float nanf(const char *);
 
     typedef union {
         cl_int CL_ALIGNED(32) s[8];
-#if __CL_HAS_ANON_STRUCT__
-        __CL_ANON_STRUCT__ struct
+#if defined(__GNUC__) && !defined(__STRICT_ANSI__)
+        __extension__ struct
         {
             cl_int x, y, z, w;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_int s0, s1, s2, s3, s4, s5, s6, s7;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_int4 lo, hi;
         };
@@ -1004,16 +986,16 @@ float nanf(const char *);
 
     typedef union {
         cl_int CL_ALIGNED(64) s[16];
-#if __CL_HAS_ANON_STRUCT__
-        __CL_ANON_STRUCT__ struct
+#if defined(__GNUC__) && !defined(__STRICT_ANSI__)
+        __extension__ struct
         {
             cl_int x, y, z, w, __spacer4, __spacer5, __spacer6, __spacer7, __spacer8, __spacer9, sa, sb, sc, sd, se, sf;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_int s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, sA, sB, sC, sD, sE, sF;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_int8 lo, hi;
         };
@@ -1035,16 +1017,16 @@ float nanf(const char *);
     /* ---- cl_uintn ---- */
     typedef union {
         cl_uint CL_ALIGNED(8) s[2];
-#if __CL_HAS_ANON_STRUCT__
-        __CL_ANON_STRUCT__ struct
+#if defined(__GNUC__) && !defined(__STRICT_ANSI__)
+        __extension__ struct
         {
             cl_uint x, y;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_uint s0, s1;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_uint lo, hi;
         };
@@ -1056,16 +1038,16 @@ float nanf(const char *);
 
     typedef union {
         cl_uint CL_ALIGNED(16) s[4];
-#if __CL_HAS_ANON_STRUCT__
-        __CL_ANON_STRUCT__ struct
+#if defined(__GNUC__) && !defined(__STRICT_ANSI__)
+        __extension__ struct
         {
             cl_uint x, y, z, w;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_uint s0, s1, s2, s3;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_uint2 lo, hi;
         };
@@ -1083,16 +1065,16 @@ float nanf(const char *);
 
     typedef union {
         cl_uint CL_ALIGNED(32) s[8];
-#if __CL_HAS_ANON_STRUCT__
-        __CL_ANON_STRUCT__ struct
+#if defined(__GNUC__) && !defined(__STRICT_ANSI__)
+        __extension__ struct
         {
             cl_uint x, y, z, w;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_uint s0, s1, s2, s3, s4, s5, s6, s7;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_uint4 lo, hi;
         };
@@ -1110,17 +1092,17 @@ float nanf(const char *);
 
     typedef union {
         cl_uint CL_ALIGNED(64) s[16];
-#if __CL_HAS_ANON_STRUCT__
-        __CL_ANON_STRUCT__ struct
+#if defined(__GNUC__) && !defined(__STRICT_ANSI__)
+        __extension__ struct
         {
             cl_uint x, y, z, w, __spacer4, __spacer5, __spacer6, __spacer7, __spacer8, __spacer9, sa, sb, sc, sd, se,
                 sf;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_uint s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, sA, sB, sC, sD, sE, sF;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_uint8 lo, hi;
         };
@@ -1142,16 +1124,16 @@ float nanf(const char *);
     /* ---- cl_longn ---- */
     typedef union {
         cl_long CL_ALIGNED(16) s[2];
-#if __CL_HAS_ANON_STRUCT__
-        __CL_ANON_STRUCT__ struct
+#if defined(__GNUC__) && !defined(__STRICT_ANSI__)
+        __extension__ struct
         {
             cl_long x, y;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_long s0, s1;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_long lo, hi;
         };
@@ -1163,16 +1145,16 @@ float nanf(const char *);
 
     typedef union {
         cl_long CL_ALIGNED(32) s[4];
-#if __CL_HAS_ANON_STRUCT__
-        __CL_ANON_STRUCT__ struct
+#if defined(__GNUC__) && !defined(__STRICT_ANSI__)
+        __extension__ struct
         {
             cl_long x, y, z, w;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_long s0, s1, s2, s3;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_long2 lo, hi;
         };
@@ -1190,16 +1172,16 @@ float nanf(const char *);
 
     typedef union {
         cl_long CL_ALIGNED(64) s[8];
-#if __CL_HAS_ANON_STRUCT__
-        __CL_ANON_STRUCT__ struct
+#if defined(__GNUC__) && !defined(__STRICT_ANSI__)
+        __extension__ struct
         {
             cl_long x, y, z, w;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_long s0, s1, s2, s3, s4, s5, s6, s7;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_long4 lo, hi;
         };
@@ -1217,17 +1199,17 @@ float nanf(const char *);
 
     typedef union {
         cl_long CL_ALIGNED(128) s[16];
-#if __CL_HAS_ANON_STRUCT__
-        __CL_ANON_STRUCT__ struct
+#if defined(__GNUC__) && !defined(__STRICT_ANSI__)
+        __extension__ struct
         {
             cl_long x, y, z, w, __spacer4, __spacer5, __spacer6, __spacer7, __spacer8, __spacer9, sa, sb, sc, sd, se,
                 sf;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_long s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, sA, sB, sC, sD, sE, sF;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_long8 lo, hi;
         };
@@ -1249,16 +1231,16 @@ float nanf(const char *);
     /* ---- cl_ulongn ---- */
     typedef union {
         cl_ulong CL_ALIGNED(16) s[2];
-#if __CL_HAS_ANON_STRUCT__
-        __CL_ANON_STRUCT__ struct
+#if defined(__GNUC__) && !defined(__STRICT_ANSI__)
+        __extension__ struct
         {
             cl_ulong x, y;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_ulong s0, s1;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_ulong lo, hi;
         };
@@ -1270,16 +1252,16 @@ float nanf(const char *);
 
     typedef union {
         cl_ulong CL_ALIGNED(32) s[4];
-#if __CL_HAS_ANON_STRUCT__
-        __CL_ANON_STRUCT__ struct
+#if defined(__GNUC__) && !defined(__STRICT_ANSI__)
+        __extension__ struct
         {
             cl_ulong x, y, z, w;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_ulong s0, s1, s2, s3;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_ulong2 lo, hi;
         };
@@ -1297,16 +1279,16 @@ float nanf(const char *);
 
     typedef union {
         cl_ulong CL_ALIGNED(64) s[8];
-#if __CL_HAS_ANON_STRUCT__
-        __CL_ANON_STRUCT__ struct
+#if defined(__GNUC__) && !defined(__STRICT_ANSI__)
+        __extension__ struct
         {
             cl_ulong x, y, z, w;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_ulong s0, s1, s2, s3, s4, s5, s6, s7;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_ulong4 lo, hi;
         };
@@ -1324,17 +1306,17 @@ float nanf(const char *);
 
     typedef union {
         cl_ulong CL_ALIGNED(128) s[16];
-#if __CL_HAS_ANON_STRUCT__
-        __CL_ANON_STRUCT__ struct
+#if defined(__GNUC__) && !defined(__STRICT_ANSI__)
+        __extension__ struct
         {
             cl_ulong x, y, z, w, __spacer4, __spacer5, __spacer6, __spacer7, __spacer8, __spacer9, sa, sb, sc, sd, se,
                 sf;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_ulong s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, sA, sB, sC, sD, sE, sF;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_ulong8 lo, hi;
         };
@@ -1357,16 +1339,16 @@ float nanf(const char *);
 
     typedef union {
         cl_float CL_ALIGNED(8) s[2];
-#if __CL_HAS_ANON_STRUCT__
-        __CL_ANON_STRUCT__ struct
+#if defined(__GNUC__) && !defined(__STRICT_ANSI__)
+        __extension__ struct
         {
             cl_float x, y;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_float s0, s1;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_float lo, hi;
         };
@@ -1378,16 +1360,16 @@ float nanf(const char *);
 
     typedef union {
         cl_float CL_ALIGNED(16) s[4];
-#if __CL_HAS_ANON_STRUCT__
-        __CL_ANON_STRUCT__ struct
+#if defined(__GNUC__) && !defined(__STRICT_ANSI__)
+        __extension__ struct
         {
             cl_float x, y, z, w;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_float s0, s1, s2, s3;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_float2 lo, hi;
         };
@@ -1405,16 +1387,16 @@ float nanf(const char *);
 
     typedef union {
         cl_float CL_ALIGNED(32) s[8];
-#if __CL_HAS_ANON_STRUCT__
-        __CL_ANON_STRUCT__ struct
+#if defined(__GNUC__) && !defined(__STRICT_ANSI__)
+        __extension__ struct
         {
             cl_float x, y, z, w;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_float s0, s1, s2, s3, s4, s5, s6, s7;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_float4 lo, hi;
         };
@@ -1432,17 +1414,17 @@ float nanf(const char *);
 
     typedef union {
         cl_float CL_ALIGNED(64) s[16];
-#if __CL_HAS_ANON_STRUCT__
-        __CL_ANON_STRUCT__ struct
+#if defined(__GNUC__) && !defined(__STRICT_ANSI__)
+        __extension__ struct
         {
             cl_float x, y, z, w, __spacer4, __spacer5, __spacer6, __spacer7, __spacer8, __spacer9, sa, sb, sc, sd, se,
                 sf;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_float s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, sA, sB, sC, sD, sE, sF;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_float8 lo, hi;
         };
@@ -1465,16 +1447,16 @@ float nanf(const char *);
 
     typedef union {
         cl_double CL_ALIGNED(16) s[2];
-#if __CL_HAS_ANON_STRUCT__
-        __CL_ANON_STRUCT__ struct
+#if defined(__GNUC__) && !defined(__STRICT_ANSI__)
+        __extension__ struct
         {
             cl_double x, y;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_double s0, s1;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_double lo, hi;
         };
@@ -1486,16 +1468,16 @@ float nanf(const char *);
 
     typedef union {
         cl_double CL_ALIGNED(32) s[4];
-#if __CL_HAS_ANON_STRUCT__
-        __CL_ANON_STRUCT__ struct
+#if defined(__GNUC__) && !defined(__STRICT_ANSI__)
+        __extension__ struct
         {
             cl_double x, y, z, w;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_double s0, s1, s2, s3;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_double2 lo, hi;
         };
@@ -1513,16 +1495,16 @@ float nanf(const char *);
 
     typedef union {
         cl_double CL_ALIGNED(64) s[8];
-#if __CL_HAS_ANON_STRUCT__
-        __CL_ANON_STRUCT__ struct
+#if defined(__GNUC__) && !defined(__STRICT_ANSI__)
+        __extension__ struct
         {
             cl_double x, y, z, w;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_double s0, s1, s2, s3, s4, s5, s6, s7;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_double4 lo, hi;
         };
@@ -1540,17 +1522,17 @@ float nanf(const char *);
 
     typedef union {
         cl_double CL_ALIGNED(128) s[16];
-#if __CL_HAS_ANON_STRUCT__
-        __CL_ANON_STRUCT__ struct
+#if defined(__GNUC__) && !defined(__STRICT_ANSI__)
+        __extension__ struct
         {
             cl_double x, y, z, w, __spacer4, __spacer5, __spacer6, __spacer7, __spacer8, __spacer9, sa, sb, sc, sd, se,
                 sf;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_double s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, sA, sB, sC, sD, sE, sF;
         };
-        __CL_ANON_STRUCT__ struct
+        __extension__ struct
         {
             cl_double8 lo, hi;
         };
@@ -1595,12 +1577,6 @@ float nanf(const char *);
 
 #ifdef __cplusplus
 }
-#endif
-
-#undef __CL_HAS_ANON_STRUCT__
-#undef __CL_ANON_STRUCT__
-#if defined(_WIN32) && (_MSC_VER >= 1500)
-#pragma warning(pop)
 #endif
 
 #endif /* __CL_PLATFORM_H  */

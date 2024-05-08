@@ -223,7 +223,10 @@ int CLWrapper::init()
 
     // printf("[DEBUG] Loading \"%s\"...\n", cl_name);
 
-#ifdef __APPLE__
+#ifdef EMSCRIPTEN
+    // No need to dlopen in emscripten
+    return 1;
+#elif __APPLE__
     cl_handle = dlopen(cl_name, RTLD_LAZY);
 #else
     cl_handle = dlopen(cl_name, RTLD_LAZY | RTLD_DEEPBIND);
@@ -335,17 +338,21 @@ int CLWrapper::init()
 
 int CLWrapper::shutdown()
 {
+#ifndef EMSCRIPTEN
     if (cl_handle != NULL)
     {
         // printf("[DEBUG] Close \"%s\"\n", cl_name);
         dlclose(cl_handle);
         cl_handle = NULL;
     }
-
+#endif
     return 1;
 }
 
 int CLWrapper::isInitialized()
 {
+#ifndef EMSCRIPTEN
     return (cl_handle != NULL);
+#endif
+    return 1;
 }

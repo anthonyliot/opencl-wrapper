@@ -16,7 +16,6 @@ class CLWrapper
 //////////////////////////////////////////////////////////////////////////
 // OpenCL functions
 //////////////////////////////////////////////////////////////////////////
-
 #ifndef CL_PROC_NAME
 #define CL_PROC_NAME(NAME) cl_##NAME
 #endif
@@ -228,7 +227,7 @@ extern void *(CL_API_CALL *CL_PROC_NAME(clGetExtensionFunctionAddress))(const ch
 //////////////////////////////////////////////////////////////////////////
 // OpenCL wrapper
 //////////////////////////////////////////////////////////////////////////
-
+#ifndef EMSCRIPTEN
 #define clGetPlatformIDs CL_PROC_NAME(clGetPlatformIDs)
 #define clGetPlatformInfo CL_PROC_NAME(clGetPlatformInfo)
 #define clGetDeviceIDs CL_PROC_NAME(clGetDeviceIDs)
@@ -301,3 +300,4 @@ extern void *(CL_API_CALL *CL_PROC_NAME(clGetExtensionFunctionAddress))(const ch
 #define clEnqueueWaitForEvents CL_PROC_NAME(clEnqueueWaitForEvents)
 #define clEnqueueBarrier CL_PROC_NAME(clEnqueueBarrier)
 #define clGetExtensionFunctionAddress CL_PROC_NAME(clGetExtensionFunctionAddress)
+#endif
